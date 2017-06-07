@@ -7,6 +7,20 @@ module.exports = {
         while (table.firstChild) {
             table.removeChild(table.firstChild);
         }
+        var node = document.createElement("tr");
+        document.getElementById("table").appendChild(node);
+        //Header
+        var nodeTh = document.createElement("th");
+        nodeTh.appendChild(document.createTextNode(""));
+        node.appendChild(nodeTh);
+
+        var nodeTh = document.createElement("th");
+        nodeTh.appendChild(document.createTextNode("BTC value"));
+        node.appendChild(nodeTh);
+
+        var nodeTh = document.createElement("th");
+        nodeTh.appendChild(document.createTextNode("Dollar value"));
+        node.appendChild(nodeTh);
 
         Object.keys(BTCMap).forEach((key) => {
             var node = document.createElement("tr");
@@ -14,8 +28,8 @@ module.exports = {
 
             //Currency name 
             var nodeTd = document.createElement("td");
-            var text = document.createTextNode(key);
-            nodeTd.appendChild(text);
+            // var text = document.createTextNode(key);
+            nodeTd.appendChild(document.createTextNode(key));
             node.appendChild(nodeTd);
 
             //BTC value
@@ -30,6 +44,10 @@ module.exports = {
             nodeTd.appendChild(text);
             node.appendChild(nodeTd);
         });
+        // var node = document.createElement("tr");
+        // document.getElementById("table").appendChild(node);
+        // nodeTh.appendChild(document.createTextNode("Total"));
+        // node.appendChild(nodeTh);
     },
 
     displayTotal: (USD) => {
