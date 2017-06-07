@@ -9,7 +9,7 @@ const getCurrenciesValue = () => {
     axios.get(constantes.API_COINMARKETCAP_ALL_NEX, {})
         .then(function(response) {
             const BTCMap = getBTC(response.data, wallet);
-            const USDMap = getUSD(response.data, BTCMap);
+            const USDMap = getUSD(response.data, wallet);
             const USD = getSum(USDMap);
             view.createTable(BTCMap, USDMap);
             view.displayTotal(USD);
@@ -29,10 +29,10 @@ const getBTC = (data, currencies) => {
     return BTC;
 }
 
-const getUSD = (data, BTCMap) => {
+const getUSD = (data, currencies) => {
     const USD = {};
-    for (let currency in BTCMap) {
-        let USDValue = data[currency].price.usd * BTCMap[currency];
+    for (let currency in currencies) {
+        let USDValue = data[currency].price.usd * currencies[currency];
         USD[currency] = USDValue;
     }
     return USD;
