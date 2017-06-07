@@ -1,12 +1,12 @@
 'use strict';
-'use strict';
 
 import { wallet } from "./currencies";
+import { constantes } from "./constantes";
 import axios from "axios";
 import * as view from "./view";
 
 const getCurrenciesValue = () => {
-    axios.get('https://poloniex.com/public?command=returnTicker', {})
+    axios.get(constantes.API_COINMARKETCAP_ALL_NEX, {})
         .then(function(response) {
             const BTCMap = getBTC(response.data, wallet);
             const USDMap = getUSD(response.data, BTCMap);
@@ -23,7 +23,7 @@ const getCurrenciesValue = () => {
 const getBTC = (data, currencies) => {
     const BTC = {};
     for (let currency in currencies) {
-        let BTCValue = data["BTC_" + currency].last * currencies[currency];
+        let BTCValue = data[currency].price.btc * currencies[currency];
         BTC[currency] = BTCValue;
     }
     return BTC;
@@ -32,7 +32,7 @@ const getBTC = (data, currencies) => {
 const getUSD = (data, BTCMap) => {
     const USD = {};
     for (let currency in BTCMap) {
-        let USDValue = data["USDT_BTC"].last * BTCMap[currency];
+        let USDValue = data[currency].price.usd * BTCMap[currency];
         USD[currency] = USDValue;
     }
     return USD;
