@@ -5,7 +5,8 @@ td {
     width: 280px;
 }
 
-#total_dol {
+#total_dol,
+#total_eur {
     padding-top: 15px;
     font-size: 20px;
 }

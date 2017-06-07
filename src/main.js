@@ -10,9 +10,11 @@ const getCurrenciesValue = () => {
         .then(function(response) {
             const BTCMap = getBTC(response.data, wallet);
             const USDMap = getUSD(response.data, wallet);
+            const EURMap = getEUR(response.data, wallet);
             const USD = getSum(USDMap);
-            view.createTable(BTCMap, USDMap);
-            view.displayTotal(USD);
+            const EUR = getSum(EURMap);
+            view.createTable(BTCMap, USDMap, EURMap);
+            view.displayTotal(USD, EUR);
 
         })
         .catch(function(error) {
@@ -38,9 +40,23 @@ const getUSD = (data, currencies) => {
     return USD;
 }
 
+const getEUR = (data, currencies) => {
+    const EUR = {};
+    for (let currency in currencies) {
+        let EURValue = data[currency].price.eur * currencies[currency];
+        EUR[currency] = EURValue;
+    }
+    return EUR;
+}
+
 const getSum = (USDMap) => {
     return Object.keys(USDMap).reduce((total, c) => {
         return total + USDMap[c];
+    }, 0);
+}
+const getSumEur = (EURMap) => {
+    return Object.keys(EURMap).reduce((total, c) => {
+        return total + EURMap[c];
     }, 0);
 }
 

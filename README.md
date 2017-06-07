@@ -7,12 +7,13 @@ Get the value of your crypto currencies from Poloniex
 2. Fill in currencies.js file:
 ```javascript
 {
-    "ETH": 1.0,
-    "DGB": 1.0,
-    "FCT": 1.0,
-    "GAME": 1.0,
-    "LSK": 1.0,
-    "SJCX": 1.0,
-    "XRP": 1.0,
+    "eth": 1.0,
+    "dgb": 1.0,
+    "fct": 1.0,
+    "game": 1.0,
+    "lsk": 1.0,
+    "sjcx": 1.0,
+    "xrp": 1.0,
+    "nlg": 1.0,
 }
 ```

@@ -2,7 +2,7 @@
 
 module.exports = {
 
-    createTable: (BTCMap, USDMap) => {
+    createTable: (BTCMap, USDMap, EURMap) => {
         var table = document.getElementById("table");
         while (table.firstChild) {
             table.removeChild(table.firstChild);
@@ -19,7 +19,11 @@ module.exports = {
         node.appendChild(nodeTh);
 
         var nodeTh = document.createElement("th");
-        nodeTh.appendChild(document.createTextNode("Dollar value"));
+        nodeTh.appendChild(document.createTextNode("Dollar"));
+        node.appendChild(nodeTh);
+
+        var nodeTh = document.createElement("th");
+        nodeTh.appendChild(document.createTextNode("Euro"));
         node.appendChild(nodeTh);
 
         Object.keys(BTCMap).forEach((key) => {
@@ -43,6 +47,12 @@ module.exports = {
             var text = document.createTextNode(Math.round(USDMap[key]) + " $");
             nodeTd.appendChild(text);
             node.appendChild(nodeTd);
+
+            //EUR value
+            var nodeTd = document.createElement("td");
+            var text = document.createTextNode(Math.round(EURMap[key]) + " €");
+            nodeTd.appendChild(text);
+            node.appendChild(nodeTd);
         });
         // var node = document.createElement("tr");
         // document.getElementById("table").appendChild(node);
@@ -50,7 +60,8 @@ module.exports = {
         // node.appendChild(nodeTh);
     },
 
-    displayTotal: (USD) => {
+    displayTotal: (USD, EUR) => {
         document.getElementById("total_dol").innerHTML = "Total : " + Math.round(USD) + " $";
+        document.getElementById("total_eur").innerHTML = "Total : " + Math.round(EUR) + " €";
     },
 }
